@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "Nwcb9l+xTJ+6k+hX5cD+3hJXL2cGqs7+qYpYtA0RZEMQ36Okzn5mqHSgSqV5GNyC5Sqh+Gp+ciTC8SiTeTZYIw==",
+  "success": true,
+  "projectFilePath": "C:\\Programacion_MinTic\\Aplicacion\\Dominio\\Dominio.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jmari\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\jmari\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
