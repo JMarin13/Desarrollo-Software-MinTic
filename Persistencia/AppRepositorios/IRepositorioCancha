@@ -1,0 +1,16 @@
+using System.Collections.Generic;
+using Dominio;
+
+namespace Persistencia
+{
+    public interface IRepositorioCancha
+    {
+        // Firmar los metodos
+        bool CrearCancha(Cancha cancha);
+        Cancha BuscarCancha(int idCancha);
+        bool EliminarCancha(int idCancha);
+        bool ActualizarCancha(Cancha cancha);
+        IEnumerable<Cancha> ListarCanchas();
+    }
+}
+
