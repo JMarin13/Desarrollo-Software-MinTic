@@ -11,5 +11,6 @@ namespace Persistencia
         bool EliminarDeportista(int idDeportista);
         bool ActualizarDeportista(Deportista deportista);
         IEnumerable<Deportista> ListarDeportistas();
+        List<Deportista> ListarDeportistas1();
     }
 }
