@@ -18,15 +18,15 @@ namespace Persistencia
             _appContext=appContext;
         }
 
-        bool IRepositorioDeportista.CrearDeportista(Deportista deportista)
+        public bool CrearDeportista(Deportista obj)
         {
             bool creado=false;
-            bool existe=ValidarNombre(deportista);
+            bool existe=ValidarNombre(obj);
             if(!existe)
             {
                 try
                 {
-                    _appContext.Deportistas.Add(deportista);
+                    _appContext.Deportistas.Add(obj);
                     _appContext.SaveChanges();
                     creado= true;
                     
@@ -40,16 +40,15 @@ namespace Persistencia
             }            
             return creado;
         }
-        Deportista IRepositorioDeportista.BuscarDeportista(int idDeportista)
+        public Deportista BuscarDeportista(int id)
         {
-            /*var deportista=_appContext.Deportistas.Find(iddeportista);
-            return deportista;*/
-            return _appContext.Deportistas.Find(idDeportista);
+            return _appContext.Deportistas.Find(id);
         }
-        bool IRepositorioDeportista.EliminarDeportista(int idDeportista)
+
+        public bool EliminarDeportista(int id)
         {
             bool eliminado=false;
-            var deportista=_appContext.Deportistas.Find(idDeportista);
+            var deportista=_appContext.Deportistas.Find(id);
             if(deportista!=null)
             {
                 try
@@ -66,15 +65,25 @@ namespace Persistencia
             return eliminado;
         }
 
-        bool IRepositorioDeportista.ActualizarDeportista(Deportista deportista)
+        public bool ActualizarDeportista(Deportista obj)
         {
             bool actualizado= false;
-            var mun=_appContext.Deportistas.Find(deportista.Id);
+            var mun=_appContext.Deportistas.Find(obj.Id);
             if(mun!=null)
             {
                 try
                 {
-                     mun.Nombre=deportista.Nombre;
+                     mun.Nombres=obj.Nombres;
+                     mun.Documento=obj.Documento;
+                     mun.Apellidos=obj.Apellidos;
+                     mun.Genero=obj.Genero;
+                     mun.Direccion=obj.Direccion;
+                     mun.Celular=obj.Celular;
+                     mun.Correo=obj.Correo;
+                     mun.Rh=obj.Rh;
+                     mun.EPS=obj.EPS;
+                     mun.FechaNacimiento=obj.FechaNacimiento;
+                     mun.EquipoId=obj.EquipoId;
                      _appContext.SaveChanges();
                      actualizado=true;
                 }
@@ -86,15 +95,20 @@ namespace Persistencia
             }
             return actualizado;
         }
-        IEnumerable<Deportista> IRepositorioDeportista.ListarDeportistas()
+        public IEnumerable<Deportista> ListarDeportistas()
         {
             return _appContext.Deportistas;
         }
+
+        public List<Deportista> ListarDeportistas1()
+        {
+            return _appContext.Deportistas.ToList();
+        }
         // metodo que verifica la existencia de un nombre antes de guardarlo
-        bool ValidarNombre(Deportista deportista)
+        bool ValidarNombre(Deportista obj)
         {
             bool existe=false;
-            var mun=_appContext.Deportistas.FirstOrDefault(m=>m.Nombre==deportista.Nombre);
+            var mun=_appContext.Deportistas.FirstOrDefault(m=>m.Nombres==obj.Nombres);
             if(mun!=null)
             {
                 existe=true;
