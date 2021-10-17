@@ -18,15 +18,15 @@ namespace Persistencia
             _appContext=appContext;
         }
 
-        bool IRepositorioEscenario.CrearEscenario(Escenario escenario)
+        public bool CrearEscenario(Escenario obj)
         {
             bool creado=false;
-            bool existe=ValidarNombre(escenario);
+            bool existe=ValidarNombre(obj);
             if(!existe)
             {
                 try
                 {
-                    _appContext.Escenarios.Add(escenario);
+                    _appContext.Escenarios.Add(obj);
                     _appContext.SaveChanges();
                     creado= true;
                     
@@ -40,21 +40,19 @@ namespace Persistencia
             }            
             return creado;
         }
-        Escenario IRepositorioEscenario.BuscarEscenario(int idEscenario)
+        public Escenario BuscarEscenario(int id)
         {
-            /*var escenario=_appContext.Escenarios.Find(idescenario);
-            return escenario;*/
-            return _appContext.Escenarios.Find(idEscenario);
+            return _appContext.Escenarios.Find(id);
         }
-        bool IRepositorioEscenario.EliminarEscenario(int idEscenario)
+        public bool EliminarEscenario(int id)
         {
             bool eliminado=false;
-            var escenario=_appContext.Escenarios.Find(idEscenario);
-            if(escenario!=null)
+            var esc=_appContext.Escenarios.Find(id);
+            if(esc!=null)
             {
                 try
                 {
-                     _appContext.Escenarios.Remove(escenario);
+                     _appContext.Escenarios.Remove(esc);
                      _appContext.SaveChanges();
                      eliminado=true;
                 }
@@ -66,15 +64,18 @@ namespace Persistencia
             return eliminado;
         }
 
-        bool IRepositorioEscenario.ActualizarEscenario(Escenario escenario)
+        public bool ActualizarEscenario(Escenario obj)
         {
             bool actualizado= false;
-            var mun=_appContext.Escenarios.Find(escenario.Id);
-            if(mun!=null)
+            var esc=_appContext.Escenarios.Find(obj.Id);
+            if(esc!=null)
             {
                 try
                 {
-                     mun.Nombre=escenario.Nombre;
+                     esc.Nombre=obj.Nombre;
+                     esc.Direccion=obj.Direccion;
+                     esc.Telefono=obj.Telefono;
+                     esc.TorneoId=obj.TorneoId;
                      _appContext.SaveChanges();
                      actualizado=true;
                 }
@@ -86,16 +87,21 @@ namespace Persistencia
             }
             return actualizado;
         }
-        IEnumerable<Escenario> IRepositorioEscenario.ListarEscenarios()
+        public IEnumerable<Escenario> ListarEscenarios()
         {
             return _appContext.Escenarios;
+            
+        }
+        public List<Escenario> ListarEscenarios1()
+        {
+            return _appContext.Escenarios.ToList();
         }
         // metodo que verifica la existencia de un nombre antes de guardarlo
-        bool ValidarNombre(Escenario escenario)
+        bool ValidarNombre(Escenario obj)
         {
             bool existe=false;
-            var mun=_appContext.Escenarios.FirstOrDefault(m=>m.Nombre==escenario.Nombre);
-            if(mun!=null)
+            var esc=_appContext.Escenarios.FirstOrDefault(e=>e.Nombre==obj.Nombre);
+            if(esc!=null)
             {
                 existe=true;
             }
