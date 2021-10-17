@@ -11,5 +11,6 @@ namespace Persistencia
         bool EliminarEscenario(int idEscenario);
         bool ActualizarEscenario(Escenario escenario);
         IEnumerable<Escenario> ListarEscenarios();
+        List<Escenario> ListarEscenarios1();
     }
 }
